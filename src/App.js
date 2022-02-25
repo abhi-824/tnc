@@ -4,6 +4,7 @@ import React from "react";
 import Navbar from "./Components/Navbar/Navbar";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Product from "./Components/Product/Product";
+import Banner from "./assets/banner.png";
 
 function App() {
   return (
@@ -13,16 +14,24 @@ function App() {
           path="/"
           element={
             <React.Fragment>
-              <Navbar></Navbar>
-              <img src="" alt="Banner" />
-              <div className="flex justify-between items-center">
-                <h1>Posters</h1>
-                <div className="buttons">
-                  <div className="filter"></div>
-                  <div className="sort"></div>
+              <div className="">
+                <Navbar></Navbar>
+                <img src={Banner} alt="Banner" />
+                <div className="flex justify-between items-center">
+                  <div className="mx-8 my-4">
+                    <h1 className="text-2xl font-family-titan-one">Posters</h1>
+                  </div>
+                  <div className="buttons">
+                    <button className="bg-[#3E83B5] text-white font-family-titan-one px-4 py-2 rounded mx-2">
+                      Filter
+                    </button>
+                    <button className="bg-[#3E83B5] text-white font-family-titan-one px-4 py-2 rounded mx-2 mr-8">
+                      Sort
+                    </button>
+                  </div>
                 </div>
+                <Dashboard></Dashboard>
               </div>
-              <Dashboard></Dashboard>
             </React.Fragment>
           }
         ></Route>
@@ -32,7 +41,9 @@ function App() {
             <React.Fragment>
               <Navbar></Navbar>
               <div className="flex justify-between items-center">
-                <h1>Posters</h1>
+                <div className="mx-8 my-4">
+                  <h1 className="text-2xl font-family-titan-one">Posters</h1>
+                </div>
                 <div className="buttons">
                   <div className="filter"></div>
                   <div className="sort"></div>
@@ -43,7 +54,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/search/:id"
+          path="/product/:id"
           element={
             <React.Fragment>
               <Navbar></Navbar>
@@ -51,7 +62,6 @@ function App() {
             </React.Fragment>
           }
         ></Route>
-
       </Routes>
     </BrowserRouter>
   );

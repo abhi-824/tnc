@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+.font-family-titan-one{
+    font-family:"Titan One";
+}
+.shadow-tnc{
+    filter: drop-shadow(-10.9898px 10.9898px 8.99491px rgba(0, 0, 0, 0.25));
+}
+.shadow-tnc-lg{
+    filter: drop-shadow(-26.9444px 26.9444px 13.4722px rgba(0, 0, 0, 0.25));
+}
