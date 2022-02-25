@@ -2,10 +2,12 @@ import Logo from "../../assets/logo.png";
 import User from "../../assets/user.png";
 import Cart from "../../assets/cart.png";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function Navbar(props) {
+  const navigate = useNavigate();
   function handleSearch(e){
     e.preventDefault();
+    navigate('/search/'+e.target["searchBarText"].value)
   }
   return (
     <div className="px-4">
@@ -21,7 +23,7 @@ export default function Navbar(props) {
           <form action="" onSubmit={handleSearch}>
             <input
               type="text"
-              name=""
+              name="searchBarText"
               id="search-query"
               className="mx-2 border-2 px-2"
               placeholder="Search for posters"
