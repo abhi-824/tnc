@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 export default function Navbar(props) {
   const navigate = useNavigate();
-  function handleSearch(e){
+  function handleSearch(e) {
     e.preventDefault();
-    navigate('/search/'+e.target["searchBarText"].value)
+    navigate("/search/" + e.target["searchBarText"].value);
   }
   return (
     <div className="px-4">
@@ -15,7 +15,7 @@ export default function Navbar(props) {
         <div className="pt-4">
           <div className="logo">
             <Link to="/">
-              <img src={Logo} alt="Logo" />
+              <img src={Logo} alt="Logo" className="max-h-[100px]" />
             </Link>
           </div>
         </div>
@@ -32,9 +32,11 @@ export default function Navbar(props) {
           <button>
             <img src={User} alt="profile pic" className="mx-2" />
           </button>
-          <button>
-            <img src={Cart} alt="cart" className="mx-2" />
-          </button>
+          <Link to="/cart">
+            <button>
+              <img src={Cart} alt="cart" className="mx-2" />
+            </button>
+          </Link>
         </div>
       </div>
     </div>

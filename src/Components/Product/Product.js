@@ -1,8 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 export default function Product(props) {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [quantity,setQuantity]=useState(1)
+  function handleChangeQuantity(e){
+    setQuantity(e.target.value)
+  }
   useEffect(() => {
     fetch("http://localhost:3001/product/" + id).then((res) => {
       res.json().then((data) => {
@@ -34,22 +38,31 @@ export default function Product(props) {
                 className="w-[40px] border-[1px] text-center border-gray-500 rounded"
                 min={1}
                 defaultValue={1}
+                onChange={handleChangeQuantity}
               />
             </p>
+            <div className="buttons flex">
+              <Link to={"/order/create/"+product.id+"?quantity="+quantity}>
+                <button className="filter m-2 ml-0 bg-[#3F82B5] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  Buy Now
+                </button>
+              </Link>
+              <button className="sort m-2 bg-[#607585] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Add to Cart
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <div className="w-full bg-gray-200">
+      <div className="w-full bg-gray-200 mt-10">
         <div className="flex flex-col justify-center items-center">
-          <h1 className="text-xl font-family-titan-one my-4">
+          <h1 className="text-xl font-family-titan-one my-4 mt-8">
             ABOUT THE DESIGN
           </h1>
-          <div className="w-full">
-            <div className  ="flex justify-around items-start">
+          <div className="w-full my-10">
+            <div className="flex justify-around items-start">
               <div className="">
-                <h1 className="text-lg font-bold my-4">
-                  {product.title}
-                </h1>
+                <h1 className="text-lg font-bold my-4">{product.title}</h1>
                 <p>{product.longDescription}</p>
               </div>
               <img
