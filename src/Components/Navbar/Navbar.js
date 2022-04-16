@@ -1,6 +1,7 @@
 import Logo from "../../assets/logo.png";
 import User from "../../assets/user.png";
 import Cart from "../../assets/cart.png";
+import Plus from "../../assets/plus.png"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 export default function Navbar(props) {
@@ -29,9 +30,16 @@ export default function Navbar(props) {
               placeholder="Search for posters"
             />
           </form>
-          <button>
-            <img src={User} alt="profile pic" className="mx-2" />
-          </button>
+          <Link to="/addproduct">
+            <button>
+              <img src={Plus} alt="plus" className="mx-2 max-h-[20px]" />
+            </button>
+          </Link>
+          <Link to="/account">
+            <button>
+              <img src={User} alt="profile pic" className="mx-2" />
+            </button>
+          </Link>
           <Link to="/cart">
             <button>
               <img src={Cart} alt="cart" className="mx-2" />

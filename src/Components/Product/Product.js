@@ -1,6 +1,9 @@
 import { useParams, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 export default function Product(props) {
+  const navigate = useNavigate();
+  const userId=1;
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [quantity,setQuantity]=useState(1)
@@ -15,6 +18,21 @@ export default function Product(props) {
       });
     });
   }, [id]);
+  function handleAddToCart(){
+    console.log(id)
+    fetch("http://localhost:3001/cart/user/"+userId+"/"+id,{method:"POST"}).then((data)=>{
+      data.json().then((res)=>{
+        console.log(res)
+        if(data.status==200){
+          navigate('/cart')
+        }
+        else{
+          alert("Some Error Occured");
+          navigate('/cart')
+        }
+      })
+    })
+  }
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="w-full">
@@ -47,7 +65,7 @@ export default function Product(props) {
                   Buy Now
                 </button>
               </Link>
-              <button className="sort m-2 bg-[#607585] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <button onClick={handleAddToCart} className="sort m-2 bg-[#607585] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Add to Cart
               </button>
             </div>

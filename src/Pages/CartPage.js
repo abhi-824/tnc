@@ -3,12 +3,16 @@ import Navbar from "../Components/Navbar/Navbar";
 import ProductCard2 from "../Components/Product/ProductCard2";
 import { useEffect, useState } from "react";
 export default function CartPage() {
-  const userId = 3;
+  const userId = 1;
   const [products, setProducts] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     fetch("http://localhost:3001/cart/products/" + userId).then((response) => {
       response.json().then((data) => {
         setProducts(data);
+        let total = 0
+        for (const product of data) total += Number(product.price);
+        setTotalPrice(total)
       });
     });
   }, []);
@@ -48,9 +52,12 @@ export default function CartPage() {
                 Price Details
               </h1>
               <div className="bg-gray-200 min-w-full min-h-[2px]"></div>
-              <p className="font-semibold my-10">Price for this item:</p>
+              {products.map((product, index) => {
+                return <p className="font-semibold my-4">Price for item {index + 1} : {product.price}</p>
+              })}
               <div className="bg-gray-200 min-w-full min-h-[2px]"></div>
-              <p className="font-semibold my-10 text-xl">Total Price: ₹</p>
+              <p className="font-semibold my-10 text-xl">Total Price: ₹ {totalPrice}
+              </p>
               <div className="bg-gray-200 min-w-full min-h-[2px]"></div>
             </div>
             <button className="filter m-2 ml-0 bg-[#3F82B5] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

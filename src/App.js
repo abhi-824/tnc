@@ -8,6 +8,11 @@ import CreateOrderPage from "./Pages/CreateOrderPage";
 import Footer from "./Components/Footer.js/Footer";
 import CartPage from "./Pages/CartPage";
 import UserOrdersPage from "./Pages/UserOrdersPage";
+import AccountPage from "./Pages/AccountPage";
+import AddProductPage from "./Pages/AddProduct";
+import LoginPage from "./Pages/LoginPage,";
+import RegisterPage from "./Pages/SignUp";
+
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +23,10 @@ function App() {
         <Route path="/order/create/:id" element={<CreateOrderPage />}></Route>
         <Route path="/cart" element={<CartPage />} />
         <Route path="/orders" element={<UserOrdersPage />}></Route>
+        <Route path="/account" element={<AccountPage />}></Route>
+        <Route path="/addproduct" element={<AddProductPage />}></Route>
+        <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/register" element={<RegisterPage/>}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>
