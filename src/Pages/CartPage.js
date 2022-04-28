@@ -3,7 +3,7 @@ import Navbar from "../Components/Navbar/Navbar";
 import ProductCard2 from "../Components/Product/ProductCard2";
 import { useEffect, useState } from "react";
 export default function CartPage() {
-  const userId = 1;
+  const userId = 3;
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {

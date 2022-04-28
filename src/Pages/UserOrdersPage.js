@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../Components/Navbar/Navbar";
 import { useEffect, useState } from "react";
 export default function UserOrders() {
-  const userId = 1;
+  const userId = 3;
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     fetch("http://localhost:3001/user/orders/" + userId).then((response) => {

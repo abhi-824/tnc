@@ -3,7 +3,7 @@ import Navbar from "../Components/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 export default function AccountPage() {
-    const userId = 1;
+    const userId = 3;
     const [user, setUser] = useState({})
     useEffect(() => {
         fetch("http://localhost:3001/user/" + userId).then((data) => {

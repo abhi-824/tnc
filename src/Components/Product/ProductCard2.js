@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export default function ProductCard2(props) {
   const { id } = useParams();
   const navigate=useNavigate();
-  const userId = 1;
+  const userId = 3;
   const [product, setProduct] = useState({});
   const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),

@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 export default function Product(props) {
   const navigate = useNavigate();
-  const userId=1;
+  const userId = 3;
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  const [quantity,setQuantity]=useState(1)
-  function handleChangeQuantity(e){
-    setQuantity(e.target.value)
+  const [quantity, setQuantity] = useState(1);
+  function handleChangeQuantity(e) {
+    setQuantity(e.target.value);
   }
   useEffect(() => {
     fetch("http://localhost:3001/product/" + id).then((res) => {
@@ -18,20 +18,22 @@ export default function Product(props) {
       });
     });
   }, [id]);
-  function handleAddToCart(){
-    console.log(id)
-    fetch("http://localhost:3001/cart/user/"+userId+"/"+id,{method:"POST"}).then((data)=>{
-      data.json().then((res)=>{
-        console.log(res)
-        if(data.status==200){
-          navigate('/cart')
-        }
-        else{
+  function handleAddToCart() {
+    console.log({id,quantity});
+    fetch("http://localhost:3001/cart/user/" + userId + "/" + id+'/'+quantity, {
+      method: "POST",
+      body: JSON.stringify({ quantity: quantity }),
+    }).then((data) => {
+      data.json().then((res) => {
+        console.log(res);
+        if (data.status == 200) {
+          navigate("/cart");
+        } else {
           alert("Some Error Occured");
-          navigate('/cart')
+          navigate("/cart");
         }
-      })
-    })
+      });
+    });
   }
   return (
     <div className="flex flex-col justify-center items-center">
@@ -60,12 +62,17 @@ export default function Product(props) {
               />
             </p>
             <div className="buttons flex">
-              <Link to={"/order/create/"+product.id+"?quantity="+quantity}>
+              <Link
+                to={"/order/create/" + product.id + "?quantity=" + quantity}
+              >
                 <button className="filter m-2 ml-0 bg-[#3F82B5] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   Buy Now
                 </button>
               </Link>
-              <button onClick={handleAddToCart} className="sort m-2 bg-[#607585] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <button
+                onClick={handleAddToCart}
+                className="sort m-2 bg-[#607585] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
                 Add to Cart
               </button>
             </div>
