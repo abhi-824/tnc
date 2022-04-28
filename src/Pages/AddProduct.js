@@ -25,13 +25,10 @@ export default function AddProductPage() {
           "Content-Type": "application/json",
         },
       }).then(
-        (res) => {
-          console.log("Product Sent");
-        },
-        function (error) {
-          console.log("Error");
-        }
-      );
+        (res) => res.json()
+      ).then(data=>{
+        console.log("Product Sent");
+      });
     } catch (error) {
       console.log("Error");
     }
