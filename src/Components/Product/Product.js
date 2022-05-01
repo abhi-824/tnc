@@ -3,10 +3,24 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 export default function Product(props) {
   const navigate = useNavigate();
-  const userId = 3;
+  const [userId, setUserId] = useState();
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const Token = localStorage.getItem("token");
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    if (Token) {
+      fetch("http://localhost:3001/auth/" + Token).then((data) => {
+        data.json().then((data) => {
+          console.log(data);
+          setUser(data.data.response);
+          setUserId(data.data.response.id);
+        });
+      });
+    }
+  }, [Token]);
   function handleChangeQuantity(e) {
     setQuantity(e.target.value);
   }
@@ -19,14 +33,21 @@ export default function Product(props) {
     });
   }, [id]);
   function handleAddToCart() {
-    console.log({id,quantity});
-    fetch("http://localhost:3001/cart/user/" + userId + "/" + id+'/'+quantity, {
-      method: "POST",
-      body: JSON.stringify({ quantity: quantity }),
-    }).then((data) => {
+    if (!userId) navigate("/login");
+    console.log({ id, quantity });
+    fetch(
+      "http://localhost:3001/cart/user/" + userId + "/" + id,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ quantity: Number(quantity) }),
+      }
+    ).then((data) => {
       data.json().then((res) => {
         console.log(res);
-        if (data.status == 200) {
+        if (data.status === 200) {
           navigate("/cart");
         } else {
           alert("Some Error Occured");

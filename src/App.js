@@ -12,6 +12,7 @@ import AccountPage from "./Pages/AccountPage";
 import AddProductPage from "./Pages/AddProduct";
 import LoginPage from "./Pages/LoginPage,";
 import RegisterPage from "./Pages/SignUp";
+import CreateProductPage from "./Pages/CreatedProducts";
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
         <Route path="/addproduct" element={<AddProductPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/register" element={<RegisterPage/>}></Route>
+        <Route path="/products" element={<CreateProductPage/>}></Route>
+
       </Routes>
       <Footer />
     </BrowserRouter>

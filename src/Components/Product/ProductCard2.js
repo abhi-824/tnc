@@ -2,9 +2,24 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 export default function ProductCard2(props) {
   const { id } = useParams();
-  const navigate=useNavigate();
-  const userId = 3;
+  const navigate = useNavigate();
+  const [userId, setUserId] = useState();
+
   const [product, setProduct] = useState({});
+  const Token = localStorage.getItem("token");
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    if (Token) {
+      fetch("http://localhost:3001/auth/" + Token).then((data) => {
+        data.json().then((data) => {
+          console.log(data);
+          setUser(data.data.response);
+          setUserId(data.data.response.id);
+        });
+      });
+    }
+  }, [Token]);
   const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
   });
@@ -13,16 +28,20 @@ export default function ProductCard2(props) {
     setQuantity(e.target.value);
   }
   async function handleCreateOrder(e) {
-    const rawData=await fetch('http://localhost:3001/order/create/' + userId + "/" + id, {
-      method: "POST",
-      body: JSON.stringify({ qty: quantity })
-    })
-    if(rawData.status!=200){
+    const rawData = await fetch(
+      "http://localhost:3001/order/create/" + userId + "/" + id,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ qty: quantity }),
+      }
+    );
+    if (rawData.status != 200) {
       alert("Some Error Occured!");
-    }
-    else{
-      const data=await rawData.json();
-      navigate('/orders'); 
+    } else {
+      navigate("/orders");
     }
   }
   useEffect(() => {
@@ -78,7 +97,10 @@ export default function ProductCard2(props) {
           </p>
           <div className="bg-gray-200 min-w-full min-h-[2px]"></div>
         </div>
-        <button onClick={handleCreateOrder} className="filter m-2 ml-0 bg-[#3F82B5] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button
+          onClick={handleCreateOrder}
+          className="filter m-2 ml-0 bg-[#3F82B5] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
           Place Order
         </button>
       </div>
