@@ -22,7 +22,7 @@ export default function CreatedProductPage() {
   useEffect(() => {
     console.log(userId);
     fetch("http://localhost:3001/view/myproducts/" + userId).then((response) => {
-      response.json().then((data) => {
+      response.json().then((data) => {  
         if (response.status === 200) {
           setProducts(data);
           console.log(data)

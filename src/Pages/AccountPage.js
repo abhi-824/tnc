@@ -2,7 +2,9 @@ import React from "react";
 import Navbar from "../Components/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function AccountPage() {
+  const navigate = useNavigate();
   const Token = localStorage.getItem("token");
   const [user, setUser] = useState();
   useEffect(() => {
@@ -28,6 +30,10 @@ export default function AccountPage() {
       }))
     }
   })
+  function handleOnLogout(){
+    localStorage.removeItem("token");
+    navigate("/")
+  }
   return (
     <React.Fragment>
       <Navbar></Navbar>
@@ -65,6 +71,11 @@ export default function AccountPage() {
                   View Your Products
                 </button>
               </Link>
+              {/* <Link to="/"> */}
+                <button className="filter m-2 ml-0 bg-[#d47878] hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={handleOnLogout}>
+                  Logout
+                </button>
+              {/* </Link> */}
             </div>
           </div>
         ) : (

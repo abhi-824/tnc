@@ -29,6 +29,7 @@ export default function AddProductPage() {
       description: Desc,
       price: Price,
       FDesc,
+      userId:user.id
     };
     console.log(data);
     try {

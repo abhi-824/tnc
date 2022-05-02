@@ -1,9 +1,11 @@
 import React from "react";
 import Navbar from "../Components/Navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 import ProductCard2 from "../Components/Product/ProductCard2";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 export default function CartPage() {
+  const navigate = useNavigate();
   const [userId, setUserId] = useState();
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -35,6 +37,48 @@ export default function CartPage() {
       });
     });
   }, [userId]);
+  async function handlePostOrders(e){
+    async function handleCreateOrder(quantity,id) {
+      const rawData = await fetch(
+        "http://localhost:3001/order/create/" + userId + "/" + id,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ qty: quantity }),
+        }
+      );
+      if (rawData.status !== 200) {
+        alert("Some Error Occured!");
+        return;
+      } else {
+        return;
+      }
+    }
+    async function removeFromCart(id){
+      const rawData = await fetch(
+        "http://localhost:3001/cart/product/" + userId + "/" + id,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          }
+        }
+      );
+      if (rawData.status !== 200) {
+        alert("Some Error Occured!");
+      } else {
+        return;
+      }
+      return rawData;
+    }
+    for(const product of products){
+      await handleCreateOrder(product.quantity,product.id)
+      await removeFromCart(product.id)
+    }
+    navigate("/orders")
+  }
   return (
     <React.Fragment>
       <Navbar></Navbar>
@@ -88,8 +132,8 @@ export default function CartPage() {
                 </p>
                 <div className="bg-gray-200 min-w-full min-h-[2px]"></div>
               </div>
-              <button className="filter m-2 ml-0 bg-[#3F82B5] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Place Order
+              <button onClick={handlePostOrders} className="filter m-2 ml-0 bg-[#3F82B5] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Place Order(s)
               </button>
             </div>
           </div>
