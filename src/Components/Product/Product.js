@@ -12,7 +12,11 @@ export default function Product(props) {
 
   useEffect(() => {
     if (Token) {
-      fetch("https://api-abhinyas.herokuapp.com/auth/" + Token).then((data) => {
+      fetch("https://api-abhinyas.herokuapp.com/auth/" + Token, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }).then((data) => {
         data.json().then((data) => {
           console.log(data);
           setUser(data.data.response);
@@ -21,11 +25,15 @@ export default function Product(props) {
       });
     }
   }, [Token]);
-  function handleChangeQuantity(e)  {
+  function handleChangeQuantity(e) {
     setQuantity(e.target.value);
   }
   useEffect(() => {
-    fetch("https://api-abhinyas.herokuapp.com/product/" + id).then((res) => {
+    fetch("https://api-abhinyas.herokuapp.com/product/" + id, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    }).then((res) => {
       res.json().then((data) => {
         console.log(data);
         setProduct(data[0]);
@@ -35,16 +43,14 @@ export default function Product(props) {
   function handleAddToCart() {
     if (!userId) navigate("/login");
     console.log({ id, quantity });
-    fetch(
-      "https://api-abhinyas.herokuapp.com/cart/user/" + userId + "/" + id,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ quantity: Number(quantity) }),
-      }
-    ).then((data) => {
+    fetch("https://api-abhinyas.herokuapp.com/cart/user/" + userId + "/" + id, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({ quantity: Number(quantity) }),
+    }).then((data) => {
       data.json().then((res) => {
         console.log(res);
         if (data.status === 200) {
