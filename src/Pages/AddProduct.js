@@ -14,7 +14,7 @@ export default function AddProductPage() {
   const [user, setUser] = useState();
   useEffect(() => {
     if (Token) {
-      fetch("http://localhost:3001/auth/" + Token).then((data) => {
+      fetch("https://api-abhinyas.herokuapp.com/auth/" + Token).then((data) => {
         data.json().then((data) => {
           setUser(data.data.response);
         });
@@ -33,7 +33,7 @@ export default function AddProductPage() {
     };
     console.log(data);
     try {
-      fetch("http://localhost:3001/product", {
+      fetch("https://api-abhinyas.herokuapp.com/product", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

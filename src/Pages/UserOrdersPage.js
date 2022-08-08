@@ -10,7 +10,7 @@ export default function UserOrders() {
 
   useEffect(() => {
     if (Token) {
-      fetch("http://localhost:3001/auth/" + Token).then((rdata) => {
+      fetch("https://api-abhinyas.herokuapp.com/auth/" + Token).then((rdata) => {
         rdata.json().then((data) => {
           if(rdata.status===200){
             console.log(data);
@@ -22,7 +22,7 @@ export default function UserOrders() {
     }
   }, [Token]);
   useEffect(() => {
-    fetch("http://localhost:3001/user/orders/" + userId).then((response) => {
+    fetch("https://api-abhinyas.herokuapp.com/user/orders/" + userId).then((response) => {
       response.json().then((data) => {
         console.log(data)
         if(response.status===200) 

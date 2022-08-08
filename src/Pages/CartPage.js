@@ -14,7 +14,7 @@ export default function CartPage() {
 
   useEffect(() => {
     if (Token) {
-      fetch("http://localhost:3001/auth/" + Token).then((data) => {
+      fetch("https://api-abhinyas.herokuapp.com/auth/" + Token).then((data) => {
         data.json().then((data) => {
           console.log(data);
           setUser(data.data.response);
@@ -25,7 +25,7 @@ export default function CartPage() {
   }, [Token]);
   useEffect(() => {
     console.log(userId);
-    fetch("http://localhost:3001/cart/products/" + userId).then((response) => {
+    fetch("https://api-abhinyas.herokuapp.com/cart/products/" + userId).then((response) => {
       response.json().then((data) => {
         if (response.status === 200) {
           setProducts(data);
@@ -40,7 +40,7 @@ export default function CartPage() {
   async function handlePostOrders(e){
     async function handleCreateOrder(quantity,id) {
       const rawData = await fetch(
-        "http://localhost:3001/order/create/" + userId + "/" + id,
+        "https://api-abhinyas.herokuapp.com/order/create/" + userId + "/" + id,
         {
           method: "POST",
           headers: {
@@ -58,7 +58,7 @@ export default function CartPage() {
     }
     async function removeFromCart(id){
       const rawData = await fetch(
-        "http://localhost:3001/cart/product/" + userId + "/" + id,
+        "https://api-abhinyas.herokuapp.com/cart/product/" + userId + "/" + id,
         {
           method: "DELETE",
           headers: {

@@ -10,7 +10,7 @@ export default function CreatedProductPage() {
 
   useEffect(() => {
     if (Token) {
-      fetch("http://localhost:3001/auth/" + Token).then((data) => {
+      fetch("https://api-abhinyas.herokuapp.com/auth/" + Token).then((data) => {
         data.json().then((data) => {
           console.log(data);
           setUser(data.data.response);
@@ -21,7 +21,7 @@ export default function CreatedProductPage() {
   }, [Token]);
   useEffect(() => {
     console.log(userId);
-    fetch("http://localhost:3001/view/myproducts/" + userId).then((response) => {
+    fetch("https://api-abhinyas.herokuapp.com/view/myproducts/" + userId).then((response) => {
       response.json().then((data) => {  
         if (response.status === 200) {
           setProducts(data);

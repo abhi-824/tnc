@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export default function Dashboard(props) {
   const [productList, setProductList] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:3001/product').then((res)=>{
+    fetch('https://api-abhinyas.herokuapp.com/product').then((res)=>{
       res.json().then((data)=>{
         console.log(data)
         setProductList(data)

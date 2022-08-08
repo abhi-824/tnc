@@ -11,7 +11,7 @@ export default function ProductCard2(props) {
 
   useEffect(() => {
     if (Token) {
-      fetch("http://localhost:3001/auth/" + Token).then((data) => {
+      fetch("https://api-abhinyas.herokuapp.com/auth/" + Token).then((data) => {
         data.json().then((data) => {
           console.log(data);
           setUser(data.data.response);
@@ -29,7 +29,7 @@ export default function ProductCard2(props) {
   }
   async function handleCreateOrder(e) {
     const rawData = await fetch(
-      "http://localhost:3001/order/create/" + userId + "/" + id,
+      "https://api-abhinyas.herokuapp.com/order/create/" + userId + "/" + id,
       {
         method: "POST",
         headers: {
@@ -45,7 +45,7 @@ export default function ProductCard2(props) {
     }
   }
   useEffect(() => {
-    fetch("http://localhost:3001/product/" + id).then((res) => {
+    fetch("https://api-abhinyas.herokuapp.com/product/" + id).then((res) => {
       res.json().then((data) => {
         console.log(data);
         setProduct(data[0]);

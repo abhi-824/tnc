@@ -9,7 +9,7 @@ export default function AccountPage() {
   const [user, setUser] = useState();
   useEffect(() => {
     if (Token) {
-      fetch("http://localhost:3001/auth/" + Token).then((data) => {
+      fetch("https://api-abhinyas.herokuapp.com/auth/" + Token).then((data) => {
         data.json().then((data) => {
           console.log(data)
           setUser(data.data.response);
@@ -21,7 +21,7 @@ export default function AccountPage() {
   useEffect(()=>{
     if(user)
     {
-      fetch("http://localhost:3001/user/wallet/"+user.id).then((data)=>data.json().then(res=>{
+      fetch("https://api-abhinyas.herokuapp.com/user/wallet/"+user.id).then((data)=>data.json().then(res=>{
         if(data.status===200)
         {
           console.log(res)

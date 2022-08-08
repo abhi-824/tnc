@@ -12,7 +12,7 @@ export default function Product(props) {
 
   useEffect(() => {
     if (Token) {
-      fetch("http://localhost:3001/auth/" + Token).then((data) => {
+      fetch("https://api-abhinyas.herokuapp.com/auth/" + Token).then((data) => {
         data.json().then((data) => {
           console.log(data);
           setUser(data.data.response);
@@ -21,11 +21,11 @@ export default function Product(props) {
       });
     }
   }, [Token]);
-  function handleChangeQuantity(e) {
+  function handleChangeQuantity(e)  {
     setQuantity(e.target.value);
   }
   useEffect(() => {
-    fetch("http://localhost:3001/product/" + id).then((res) => {
+    fetch("https://api-abhinyas.herokuapp.com/product/" + id).then((res) => {
       res.json().then((data) => {
         console.log(data);
         setProduct(data[0]);
@@ -36,7 +36,7 @@ export default function Product(props) {
     if (!userId) navigate("/login");
     console.log({ id, quantity });
     fetch(
-      "http://localhost:3001/cart/user/" + userId + "/" + id,
+      "https://api-abhinyas.herokuapp.com/cart/user/" + userId + "/" + id,
       {
         method: "POST",
         headers: {
@@ -71,6 +71,7 @@ export default function Product(props) {
             <h1 className="text-2xl font-family-titan-one my-4">
               {product.title}
             </h1>
+            <p className="font-bold text-xl">Rs. {product.price}</p>
             <p>{product.description}</p>
             <p>
               Quantity:{" "}

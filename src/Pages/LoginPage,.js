@@ -10,7 +10,7 @@ export default function LoginPage() {
         const data = {
             password:Password
         }
-        fetch("http://localhost:3001/login/"+Email,{
+        fetch("https://api-abhinyas.herokuapp.com/login/"+Email,{
             method:"POST",
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(data)
