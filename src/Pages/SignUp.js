@@ -14,7 +14,7 @@ export default function RegisterPage() {
       mobile: number,
       address: {},
     };
-    fetch("https://localhost:3001/register", {
+    fetch("https://api-abhinyas.herokuapp.com/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
